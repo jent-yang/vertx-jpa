@@ -15,9 +15,7 @@ public class PersistenceUnitOptions {
 	public static final int DEFAULT_EMBEDDED_PORT = 9092;
 	public static final String DEFAULT_H2_DRIVER = "org.h2.Driver";
 	public static final String DETAULT_URL = "jdbc:h2:file:C:\\aplic\\gateway\\database;";
-	public static final String DEFAULT_DATABASE_CLASS = "io.github.pflima92.plyshare.gateway.persistance.jdbc.GatewayPersistanceJDBC";
 
-	private String databaseClass;
 	private String url;
 	private String driverClass;
 	private String username;
@@ -37,7 +35,6 @@ public class PersistenceUnitOptions {
 
 	public PersistenceUnitOptions(PersistenceUnitOptions other) {
 		this();
-		databaseClass = other.getDatabaseClass();
 		url = other.getUrl();
 		driverClass = other.getDriverClass();
 		username = other.getUsername();
@@ -55,10 +52,6 @@ public class PersistenceUnitOptions {
 	public PersistenceUnitOptions(JsonObject json) {
 		this();
 		PersistenceUnitOptionsConverter.fromJson(json, this);
-	}
-
-	public String getDatabaseClass() {
-		return databaseClass;
 	}
 
 	public String getDriverClass() {
@@ -111,7 +104,6 @@ public class PersistenceUnitOptions {
 
 	private void init() {
 
-		databaseClass = DEFAULT_DATABASE_CLASS;
 		url = DETAULT_URL;
 		driverClass = DEFAULT_H2_DRIVER;
 		username = EMPTY;
@@ -126,56 +118,64 @@ public class PersistenceUnitOptions {
 		testConnection = true;
 	}
 
-	public void setDatabaseClass(String databaseClass) {
-		this.databaseClass = databaseClass;
-	}
-
-	public void setDriverClass(String driverClass) {
+	public PersistenceUnitOptions setDriverClass(String driverClass) {
 		this.driverClass = driverClass;
+		return this;
 	}
 
-	public void setEmbeddedPort(Integer embeddedPort) {
+	public PersistenceUnitOptions setEmbeddedPort(Integer embeddedPort) {
 		this.embeddedPort = embeddedPort;
+		return this;
 	}
 
-	public void setInitialPool(Integer initialPool) {
+	public PersistenceUnitOptions setInitialPool(Integer initialPool) {
 		this.initialPool = initialPool;
+		return this;
 	}
 
-	public void setMaxIdleTime(Integer maxIdleTime) {
+	public PersistenceUnitOptions setMaxIdleTime(Integer maxIdleTime) {
 		this.maxIdleTime = maxIdleTime;
+		return this;
 	}
 
-	public void setMaxPool(Integer maxPool) {
+	public PersistenceUnitOptions setMaxPool(Integer maxPool) {
 		this.maxPool = maxPool;
+		return this;
 	}
 
-	public void setMaxStatementsPerConnection(Integer maxStatementsPerConnection) {
+	public PersistenceUnitOptions setMaxStatementsPerConnection(Integer maxStatementsPerConnection) {
 		this.maxStatementsPerConnection = maxStatementsPerConnection;
+		return this;
 	}
 
-	public void setMinPool(Integer minPool) {
+	public PersistenceUnitOptions setMinPool(Integer minPool) {
 		this.minPool = minPool;
+		return this;
 	}
 
-	public void setPassword(String password) {
+	public PersistenceUnitOptions setPassword(String password) {
 		this.password = password;
+		return this;
 	}
 
-	public void setShowCommands(Boolean showCommands) {
+	public PersistenceUnitOptions setShowCommands(Boolean showCommands) {
 		this.showCommands = showCommands;
+		return this;
 	}
 
-	public void setTestConnection(Boolean testConnection) {
+	public PersistenceUnitOptions setTestConnection(Boolean testConnection) {
 		this.testConnection = testConnection;
+		return this;
 	}
 
-	public void setUrl(String url) {
+	public PersistenceUnitOptions setUrl(String url) {
 		this.url = url;
+		return this;
 	}
 
-	public void setUsername(String username) {
+	public PersistenceUnitOptions setUsername(String username) {
 		this.username = username;
+		return this;
 	}
 
 }

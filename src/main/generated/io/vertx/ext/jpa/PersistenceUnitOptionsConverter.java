@@ -27,9 +27,6 @@ import io.vertx.core.json.JsonArray;
 public class PersistenceUnitOptionsConverter {
 
   public static void fromJson(JsonObject json, PersistenceUnitOptions obj) {
-    if (json.getValue("databaseClass") instanceof String) {
-      obj.setDatabaseClass((String)json.getValue("databaseClass"));
-    }
     if (json.getValue("driverClass") instanceof String) {
       obj.setDriverClass((String)json.getValue("driverClass"));
     }
@@ -69,9 +66,6 @@ public class PersistenceUnitOptionsConverter {
   }
 
   public static void toJson(PersistenceUnitOptions obj, JsonObject json) {
-    if (obj.getDatabaseClass() != null) {
-      json.put("databaseClass", obj.getDatabaseClass());
-    }
     if (obj.getDriverClass() != null) {
       json.put("driverClass", obj.getDriverClass());
     }
