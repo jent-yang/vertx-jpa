@@ -4,10 +4,10 @@ import java.util.Properties;
 
 import javax.persistence.EntityManagerFactory;
 
+import io.vertx.ext.jpa.EntityManager;
 import io.vertx.ext.jpa.PersistenceUnitOptions;
-import io.vertx.ext.jpa.spi.EntityManagerProvider;
 
-public class HibernateEntityManagerProvider implements EntityManagerProvider {
+public class HibernateEntityManagerProvider implements EntityManager {
 	
 	private EntityManagerFactory entityManagerFactory;
 	
