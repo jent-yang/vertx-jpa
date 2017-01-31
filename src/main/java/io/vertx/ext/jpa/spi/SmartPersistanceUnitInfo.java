@@ -1,8 +1,10 @@
 package io.vertx.ext.jpa.spi;
 
 import java.util.List;
+import java.util.Properties;
 
 import javax.persistence.spi.PersistenceUnitInfo;
+import javax.persistence.spi.PersistenceUnitTransactionType;
 
 /**
  * The Interface DefaultPersistanceUnitInfo.
@@ -36,7 +38,21 @@ public interface SmartPersistanceUnitInfo extends PersistenceUnitInfo {
 	 * Sets the persistence provider package name.
 	 *
 	 * @param persistenceProviderPackageName
-	 *            the new persistence provider package name
+	 *            the new persistence provider package 'name
 	 */
 	void setPersistenceProviderPackageName(String persistenceProviderPackageName);
+
+	/**
+	 * Sets the properties.
+	 *
+	 * @param properties the new properties
+	 */
+	void setProperties(Properties properties);
+
+	/**
+	 * Sets the transaction type.
+	 *
+	 * @param resourceLocal the new transaction type
+	 */
+	void setTransactionType(PersistenceUnitTransactionType resourceLocal);
 }

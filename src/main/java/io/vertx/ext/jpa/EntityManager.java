@@ -2,19 +2,9 @@ package io.vertx.ext.jpa;
 
 import java.util.List;
 
-import javax.persistence.EntityGraph;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
 import javax.persistence.FlushModeType;
 import javax.persistence.LockModeType;
-import javax.persistence.Query;
-import javax.persistence.StoredProcedureQuery;
-import javax.persistence.TypedQuery;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaDelete;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.CriteriaUpdate;
-import javax.persistence.metamodel.Metamodel;
 
 import io.vertx.codegen.annotations.Fluent;
 import io.vertx.codegen.annotations.GenIgnore;
@@ -22,159 +12,154 @@ import io.vertx.codegen.annotations.VertxGen;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Handler;
 import io.vertx.core.json.JsonObject;
+import io.vertx.ext.jpa.impl.EntityManagerImpl;
 
 @VertxGen
-interface EntityManager {
+public interface EntityManager {
+
+	@GenIgnore
+	public static EntityManager create(javax.persistence.EntityManager em){
+		
+		return new EntityManagerImpl(em);
+	} 
+	
+	@Fluent
+	EntityManager persist(Object entity, Handler<AsyncResult<Void>> handler);
 
 	@Fluent
-	EntityManager persist(Object entity);
+	<T> EntityManager merge(T entity, Handler<AsyncResult<T>> handler);
 
 	@Fluent
-	<T> EntityManager merge(T entity, Handler<AsyncResult<T>> resultHandler);
-
+	EntityManager getTransaction(Handler<AsyncResult<EntityTransaction>> handler);
+	
 	@Fluent
-	EntityManager remove(Object entity);
-
+	EntityManager remove(Object entity, Handler<AsyncResult<Void>> handler);
+	
 	@Fluent
-	<T> EntityManager find(Class<T> entityClass, Object primaryKey, Handler<AsyncResult<T>> resultHandler);
-
+	<T> EntityManager find(Class<T> entityClass, Object primaryKey, Handler<AsyncResult<T>> handler);
+	
 	@Fluent
-	<T> EntityManager find(Class<T> entityClass, Object primaryKey, JsonObject properties);
-
+	 <T> EntityManager find(Class<T> entityClass, Object primaryKey,
+             JsonObject properties, Handler<AsyncResult<T>> handler);
+	
 	@Fluent
-	<T> EntityManager find(Class<T> entityClass, Object primaryKey, LockModeType lockMode, Handler<AsyncResult<T>> resultHandler);
-
+	<T> EntityManager find(Class<T> entityClass, Object primaryKey, LockModeType lockMode, Handler<AsyncResult<T>> handler);
+	
 	@Fluent
-	<T> EntityManager find(Class<T> entityClass, Object primaryKey, LockModeType lockMode, JsonObject properties, Handler<AsyncResult<T>> resultHandler);
-
+	 <T> EntityManager find(Class<T> entityClass, Object primaryKey, LockModeType lockMode,
+            JsonObject properties, Handler<AsyncResult<T>> handler);
+	
 	@Fluent
-	<T> EntityManager getReference(Class<T> entityClass, Object primaryKey, Handler<AsyncResult<T>> resultHandler);
-
+	<T> EntityManager getReference(Class<T> entityClass, Object primaryKey, Handler<AsyncResult<T>> handler);
+	
 	@Fluent
 	EntityManager flush();
 
 	@Fluent
 	EntityManager setFlushMode(FlushModeType flushMode);
-
-	FlushModeType getFlushMode();
+	
+	@Fluent
+	EntityManager getFlushMode(Handler<AsyncResult<FlushModeType>> handler);
+	
+	@Fluent
+	EntityManager lock(Object entity, LockModeType lockMode, Handler<AsyncResult<Void>> handler);
 
 	@Fluent
-	EntityManager lock(Object entity, LockModeType lockMode);
+	EntityManager lock(Object entity, LockModeType lockMode, JsonObject properties, Handler<AsyncResult<Void>> handler);
+	
+	@Fluent
+	EntityManager refresh(Object entity, Handler<AsyncResult<Void>> handler);
+	
+	@Fluent
+	EntityManager refresh(Object entity, JsonObject properties, Handler<AsyncResult<Void>> handler);
+	
+	@Fluent
+	EntityManager refresh(Object entity, LockModeType lockMode, Handler<AsyncResult<Void>> handler);
+	
+	@Fluent
+	EntityManager refresh(Object entity, LockModeType lockMode, JsonObject properties, Handler<AsyncResult<Void>> handler);
+	
+	@Fluent
+	EntityManager clear(Handler<AsyncResult<Void>> handler);
 
 	@Fluent
-	EntityManager lock(Object entity, LockModeType lockMode, JsonObject properties);
+	EntityManager detach(Object entity, Handler<AsyncResult<Void>> handler);
 
 	@Fluent
-	<T> EntityManager refresh(Object entity, Handler<AsyncResult<T>> resultHandler);
-
+	EntityManager contains(Object entity, Handler<AsyncResult<Boolean>> handler);
+	
 	@Fluent
-	EntityManager refresh(Object entity, JsonObject properties);
-
-	@Fluent
-	EntityManager refresh(Object entity, LockModeType lockMode);
-
-	@Fluent
-	EntityManager refresh(Object entity, LockModeType lockMode, JsonObject properties);
-
-	@Fluent
-	EntityManager clear();
-
-	@Fluent
-	EntityManager detach(Object entity);
-
-	@Fluent
-	EntityManager contains(Object entity, Handler<AsyncResult<Boolean>> resultHandle);
-
-	@GenIgnore
-	LockModeType getLockMode(Object entity);
-
+	EntityManager getLockMode(Handler<AsyncResult<LockModeType>> handler);
+	
 	@Fluent
 	EntityManager setProperty(String propertyName, Object value);
+	
+	@Fluent
+	EntityManager getProperties(Handler<AsyncResult<JsonObject>> handler);
+	
+	@Fluent
+	EntityManager createQuery(String qlString, Handler<AsyncResult<Query>> handler);
+	
+	@Fluent
+	<T> EntityManager createQuery(CriteriaQuery<T> criteriaQuery, Handler<AsyncResult<TypedQuery<T>>> handler);
+	
+	@Fluent
+	EntityManager createQuery(CriteriaUpdate updateQuery, Handler<AsyncResult<Query>> handler);
 
-	@GenIgnore
-	JsonObject getProperties();
+	@Fluent
+	EntityManager createQuery(CriteriaDelete deleteQuery, Handler<AsyncResult<Query>> handler);
+	
+	@Fluent
+	<T> EntityManager createQuery(String qlString, Class<T> resultClass, Handler<AsyncResult<TypedQuery<T>>> handler);
+	
+	@Fluent
+	EntityManager createNamedQuery(String name, Handler<AsyncResult<Query>> handler);
+	
+	@Fluent
+	<T> EntityManager createNamedQuery(String name, Class<T> resultClass, Handler<AsyncResult<TypedQuery<T>>> handler);
+	
+	@Fluent
+	EntityManager createNativeQuery(String sqlString, Handler<AsyncResult<Query>> handler);
+	
+	@Fluent
+	EntityManager createNativeQuery(String sqlString, Class<?> resultClass, Handler<AsyncResult<Query>> handler);
+	
+	@Fluent
+	EntityManager createNativeQuery(String sqlString, String resultSetMapping, Handler<AsyncResult<Query>> handler);
+	
+	@Fluent
+	EntityManager createNamedStoredProcedureQuery(String name, Handler<AsyncResult<StoredProcedureQuery>> handler);
 
-	@GenIgnore
-	Query createQuery(String qlString);
-
-	@GenIgnore
-	<T> TypedQuery<T> createQuery(CriteriaQuery<T> criteriaQuery);
-
-	@GenIgnore
-	Query createQuery(CriteriaUpdate updateQuery);
-
-	@GenIgnore
-	Query createQuery(CriteriaDelete deleteQuery);
-
-	@GenIgnore
-	<T> TypedQuery<T> createQuery(String qlString, Class<T> resultClass);
-
-	@GenIgnore
-	Query createNamedQuery(String name);
-
-	@GenIgnore
-	<T> TypedQuery<T> createNamedQuery(String name, Class<T> resultClass);
-
-	@GenIgnore
-	Query createNativeQuery(String sqlString);
-
-	@GenIgnore
-	Query createNativeQuery(String sqlString, Class resultClass);
-
-	@GenIgnore
-	Query createNativeQuery(String sqlString, String resultSetMapping);
-
-	@GenIgnore
-	StoredProcedureQuery createNamedStoredProcedureQuery(String name);
-
-	@GenIgnore
-	StoredProcedureQuery createStoredProcedureQuery(String procedureName);
-
-	@GenIgnore
-	StoredProcedureQuery createStoredProcedureQuery(String procedureName, Class... resultClasses);
-
-	@GenIgnore
-	StoredProcedureQuery createStoredProcedureQuery(String procedureName, String... resultSetMappings);
-
+	@Fluent
+	EntityManager createStoredProcedureQuery(String procedureName, Handler<AsyncResult<StoredProcedureQuery>> handler);
+	
 	@Fluent
 	EntityManager joinTransaction();
-
+	
 	@Fluent
-	EntityManager isJoinedToTransaction(Handler<AsyncResult<Boolean>> resultHandler);
-
-	@GenIgnore
-	<T> T unwrap(Class<T> cls);
-
-	@GenIgnore
-	Object getDelegate();
-
+	EntityManager isJoinedToTransaction(Handler<AsyncResult<Boolean>> handler);
+	
 	@Fluent
 	EntityManager close();
-
+	
 	@Fluent
-	EntityManager isOpen(Handler<AsyncResult<Boolean>> resultHandler);
-
-	@Fluent
-	EntityManager getTransaction(Handler<AsyncResult<EntityTransaction>> resultHandler);
-
-	@Fluent
-	EntityManager getEntityManagerFactory(Handler<AsyncResult<EntityManagerFactory>> resultHandler);
-
+	EntityManager isOpen(Handler<AsyncResult<Boolean>> result);
+	
+	@GenIgnore
+	EntityManagerFactory getEntityManagerFactory();
+	
 	@GenIgnore
 	CriteriaBuilder getCriteriaBuilder();
+	
+	@Fluent
+	EntityManager getMetamodel(Handler<AsyncResult<Metamodel>> handler);
+	
+	@Fluent
+	EntityManager createEntityGraph(String graphName, Handler<AsyncResult<EntityGraph<?>>> handler);
 
-	@GenIgnore
-	Metamodel getMetamodel();
+	@Fluent
+	EntityManager getEntityGraph(String graphName, Handler<AsyncResult<EntityGraph<?>>> handler);
 
-	@GenIgnore
-	<T> EntityGraph<T> createEntityGraph(Class<T> rootType);
-
-	@GenIgnore
-	EntityGraph<?> createEntityGraph(String graphName);
-
-	@GenIgnore
-	EntityGraph<?> getEntityGraph(String graphName);
-
-	@GenIgnore
-	<T> List<EntityGraph<? super T>> getEntityGraphs(Class<T> entityClass);
+	@Fluent
+	<T> EntityManager getEntityGraphs(Handler<AsyncResult<List<EntityGraph<T>>>> handler);
 }

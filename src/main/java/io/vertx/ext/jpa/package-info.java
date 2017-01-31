@@ -19,7 +19,7 @@
  * This client allows you to interact with any JDBC compliant database using an asynchronous API from your Vert.x
  * application.
  *
- * The client API is represented with the interface {@link io.vertx.ext.jpa.JpaProvider}.
+ * The client API is represented with the interface {@link io.vertx.ext.jpa.EntityManagerProvider}.
  *
  * To use this project, add the following dependency to the _dependencies_ section of your build descriptor:
  *
