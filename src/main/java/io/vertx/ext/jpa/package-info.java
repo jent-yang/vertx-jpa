@@ -16,35 +16,32 @@
 /**
  * = Vert.x JPA
  *
- * This client allows you to interact with any JDBC compliant database using an asynchronous API from your Vert.x
- * application.
+ * This client allows you to interact with any JDBC compliant database using an
+ * asynchronous API from your Vert.x application.
  *
- * The client API is represented with the interface {@link io.vertx.ext.jpa.EntityManagerProvider}.
+ * The client API is represented with the interface
+ * {@link io.vertx.ext.jpa.EntityManagerProvider}.
  *
- * To use this project, add the following dependency to the _dependencies_ section of your build descriptor:
+ * To use this project, add the following dependency to the _dependencies_
+ * section of your build descriptor:
  *
  * * Maven (in your `pom.xml`):
  *
- * [source,xml,subs="+attributes"]
- * ----
- * <dependency>
- *   <groupId>${maven.groupId}</groupId>
- *   <artifactId>${maven.artifactId}</artifactId>
- *   <version>${maven.version}</version>
- * </dependency>
- * ----
+ * [source,xml,subs="+attributes"] ---- <dependency>
+ * <groupId>${maven.groupId}</groupId>
+ * <artifactId>${maven.artifactId}</artifactId>
+ * <version>${maven.version}</version> </dependency> ----
  *
  * * Gradle (in your `build.gradle` file):
  *
- * [source,groovy,subs="+attributes"]
- * ----
- * compile '${maven.groupId}:${maven.artifactId}:${maven.version}'
- * ----
+ * [source,groovy,subs="+attributes"] ---- compile
+ * '${maven.groupId}:${maven.artifactId}:${maven.version}' ----
  *
  * == Use as OSGi bundle
  *
- * Vert.x JPA client can be used as an OSGi bundle. However notice that you would need to deploy all dependencies
- * first. Some connection pool requires the JPA driver to be loaded from the classpath, and so cannot be packaged /
+ * Vert.x JPA client can be used as an OSGi bundle. However notice that you
+ * would need to deploy all dependencies first. Some connection pool requires
+ * the JPA driver to be loaded from the classpath, and so cannot be packaged /
  * deployed as bundle.
  */
 @Document(fileName = "index.adoc")

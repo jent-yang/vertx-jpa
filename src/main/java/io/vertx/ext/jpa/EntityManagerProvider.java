@@ -35,40 +35,40 @@ import io.vertx.ext.jpa.impl.EntityManagerProviderImpl;
 @VertxGen
 public interface EntityManagerProvider {
 
-	/**
-	 * The default data source provider is C3P0
-	 */
-	String DEFAULT_EMF_PROVIDER_CLASS = "io.vertx.ext.jpa.spi.impl.HibernateEntityManagerFactoryProvider";
+  /**
+   * The default data source provider is C3P0
+   */
+  String DEFAULT_EMF_PROVIDER_CLASS = "io.vertx.ext.jpa.spi.impl.HibernateEntityManagerFactoryProvider";
 
-	/**
-	 * The name of the default data source
-	 */
-	String DEFAULT_DS_NAME = "DEFAULT_DS";
+  /**
+   * The name of the default data source
+   */
+  String DEFAULT_DS_NAME = "DEFAULT_DS";
 
-	@GenIgnore
-	static EntityManagerProvider createNonShared(Vertx vertx, JsonObject config) {
+  @GenIgnore
+  static EntityManagerProvider createNonShared(Vertx vertx, JsonObject config) {
 
-		return create(vertx, config, UUID.randomUUID().toString());
-	}
-	
-	@GenIgnore
-	static EntityManagerProvider createShared(Vertx vertx, JsonObject config) {
+    return create(vertx, config, UUID.randomUUID().toString());
+  }
 
-		return create(vertx, config, DEFAULT_DS_NAME);
-	}
-	
-	@GenIgnore
-	static EntityManagerProvider createShared(Vertx vertx, JsonObject config, String datasourceName) {
+  @GenIgnore
+  static EntityManagerProvider createShared(Vertx vertx, JsonObject config) {
 
-		return create(vertx, config, datasourceName);
-	}
-	
-	@GenIgnore
-	static EntityManagerProvider create(Vertx vertx, JsonObject config, String dataSourceName) {
+    return create(vertx, config, DEFAULT_DS_NAME);
+  }
 
-		return new EntityManagerProviderImpl(vertx, config, dataSourceName);
-	}
+  @GenIgnore
+  static EntityManagerProvider createShared(Vertx vertx, JsonObject config, String datasourceName) {
 
-	@Fluent
-	EntityManagerProvider getEntityManager(Handler<AsyncResult<EntityManager>> resultHandler);
+    return create(vertx, config, datasourceName);
+  }
+
+  @GenIgnore
+  static EntityManagerProvider create(Vertx vertx, JsonObject config, String dataSourceName) {
+
+    return new EntityManagerProviderImpl(vertx, config, dataSourceName);
+  }
+
+  @Fluent
+  EntityManagerProvider getEntityManager(Handler<AsyncResult<EntityManagerExt>> resultHandler);
 }

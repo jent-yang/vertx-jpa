@@ -36,8 +36,8 @@ module VertxJpa
       end
       raise ArgumentError, "Invalid arguments when calling begin()"
     end
-    #  Commit the current resource transaction, writing any
-    #  unflushed changes to the database.
+    #  Commit the current resource transaction, writing any unflushed changes to
+    #  the database.
     # @return [void]
     def commit
       if !block_given?
@@ -53,9 +53,8 @@ module VertxJpa
       end
       raise ArgumentError, "Invalid arguments when calling rollback()"
     end
-    #  Mark the current resource transaction so that the only
-    #  possible outcome of the transaction is for the transaction
-    #  to be rolled back.
+    #  Mark the current resource transaction so that the only possible outcome of
+    #  the transaction is for the transaction to be rolled back.
     # @return [void]
     def set_rollback_only
       if !block_given?
@@ -63,8 +62,8 @@ module VertxJpa
       end
       raise ArgumentError, "Invalid arguments when calling set_rollback_only()"
     end
-    #  Determine whether the current resource transaction has been
-    #  marked for rollback.
+    #  Determine whether the current resource transaction has been marked for
+    #  rollback.
     # @return [true,false] boolean indicating whether the transaction has been marked for rollback
     def get_rollback_only?
       if !block_given?

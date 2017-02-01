@@ -16,7 +16,7 @@
 
 /** @module vertx-jpa-js/entity_manager_provider */
 var utils = require('vertx-js/util/utils');
-var EntityManager = require('vertx-jpa-js/entity_manager');
+var EntityManagerExt = require('vertx-jpa-js/entity_manager_ext');
 
 var io = Packages.io;
 var JsonObject = io.vertx.core.json.JsonObject;
@@ -44,7 +44,7 @@ var EntityManagerProvider = function(j_val) {
     if (__args.length === 1 && typeof __args[0] === 'function') {
       j_entityManagerProvider["getEntityManager(io.vertx.core.Handler)"](function(ar) {
       if (ar.succeeded()) {
-        resultHandler(utils.convReturnVertxGen(EntityManager, ar.result()), null);
+        resultHandler(utils.convReturnVertxGen(EntityManagerExt, ar.result()), null);
       } else {
         resultHandler(null, ar.cause());
       }

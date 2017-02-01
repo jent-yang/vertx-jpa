@@ -1,4 +1,4 @@
-require 'vertx-jpa/entity_manager'
+require 'vertx-jpa/entity_manager_ext'
 require 'vertx/util/utils.rb'
 # Generated from io.vertx.ext.jpa.EntityManagerProvider
 module VertxJpa
@@ -35,7 +35,7 @@ module VertxJpa
     # @return [self]
     def get_entity_manager
       if block_given?
-        @j_del.java_method(:getEntityManager, [Java::IoVertxCore::Handler.java_class]).call((Proc.new { |ar| yield(ar.failed ? ar.cause : nil, ar.succeeded ? ::Vertx::Util::Utils.safe_create(ar.result,::VertxJpa::EntityManager) : nil) }))
+        @j_del.java_method(:getEntityManager, [Java::IoVertxCore::Handler.java_class]).call((Proc.new { |ar| yield(ar.failed ? ar.cause : nil, ar.succeeded ? ::Vertx::Util::Utils.safe_create(ar.result,::VertxJpa::EntityManagerExt) : nil) }))
         return self
       end
       raise ArgumentError, "Invalid arguments when calling get_entity_manager()"

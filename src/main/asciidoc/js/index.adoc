@@ -1,32 +1,29 @@
 = Vert.x JPA
 
-This client allows you to interact with any JDBC compliant database using an asynchronous API from your Vert.x
-application.
+This client allows you to interact with any JDBC compliant database using an
+asynchronous API from your Vert.x application.
 
-The client API is represented with the interface `link:../../jsdoc/module-vertx-jpa-js_entity_manager_provider-EntityManagerProvider.html[EntityManagerProvider]`.
+The client API is represented with the interface
+`link:../../jsdoc/module-vertx-jpa-js_entity_manager_provider-EntityManagerProvider.html[EntityManagerProvider]`.
 
-To use this project, add the following dependency to the _dependencies_ section of your build descriptor:
+To use this project, add the following dependency to the _dependencies_
+section of your build descriptor:
 
 * Maven (in your `pom.xml`):
 
-[source,xml,subs="+attributes"]
-----
-<dependency>
-  <groupId>io.vertx</groupId>
-  <artifactId>vertx-jpa</artifactId>
-  <version>3.4.0-SNAPSHOT</version>
-</dependency>
-----
+[source,xml,subs="+attributes"] ---- <dependency>
+<groupId>io.vertx</groupId>
+<artifactId>vertx-jpa</artifactId>
+<version>3.4.0-SNAPSHOT</version> </dependency> ----
 
 * Gradle (in your `build.gradle` file):
 
-[source,groovy,subs="+attributes"]
-----
-compile 'io.vertx:vertx-jpa:3.4.0-SNAPSHOT'
-----
+[source,groovy,subs="+attributes"] ---- compile
+'io.vertx:vertx-jpa:3.4.0-SNAPSHOT' ----
 
 == Use as OSGi bundle
 
-Vert.x JPA client can be used as an OSGi bundle. However notice that you would need to deploy all dependencies
-first. Some connection pool requires the JPA driver to be loaded from the classpath, and so cannot be packaged /
+Vert.x JPA client can be used as an OSGi bundle. However notice that you
+would need to deploy all dependencies first. Some connection pool requires
+the JPA driver to be loaded from the classpath, and so cannot be packaged /
 deployed as bundle.

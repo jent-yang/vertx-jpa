@@ -1,4 +1,4 @@
-moduleName = io.vertx.ext.jpa.EntityTransaction-module
+moduleName = io.vertx.ext.jpa.StoredProcedureQuery-module
 moduleVersion = 1.0
-extensionClasses = 
+extensionClasses = io.vertx.groovy.ext.jpa.EntityManagerExt_GroovyExtension, io.vertx.groovy.ext.jpa.Query_GroovyExtension, io.vertx.groovy.ext.jpa.StoredProcedureQuery_GroovyExtension
 staticExtensionClasses = 

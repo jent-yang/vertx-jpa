@@ -2,25 +2,25 @@ require 'vertx-jpa/entity_transaction'
 require 'vertx-jpa/stored_procedure_query'
 require 'vertx-jpa/query'
 require 'vertx/util/utils.rb'
-# Generated from io.vertx.ext.jpa.EntityManager
+# Generated from io.vertx.ext.jpa.VEntityManager
 module VertxJpa
-  class EntityManager
+  class VEntityManager
     # @private
-    # @param j_del [::VertxJpa::EntityManager] the java delegate
+    # @param j_del [::VertxJpa::VEntityManager] the java delegate
     def initialize(j_del)
       @j_del = j_del
     end
     # @private
-    # @return [::VertxJpa::EntityManager] the underlying java delegate
+    # @return [::VertxJpa::VEntityManager] the underlying java delegate
     def j_del
       @j_del
     end
     @@j_api_type = Object.new
     def @@j_api_type.accept?(obj)
-      obj.class == EntityManager
+      obj.class == VEntityManager
     end
     def @@j_api_type.wrap(obj)
-      EntityManager.new(obj)
+      VEntityManager.new(obj)
     end
     def @@j_api_type.unwrap(obj)
       obj.j_del
@@ -29,7 +29,7 @@ module VertxJpa
       @@j_api_type
     end
     def self.j_class
-      Java::IoVertxExtJpa::EntityManager.java_class
+      Java::IoVertxExtJpa::VEntityManager.java_class
     end
     # @param [Object] entity 
     # @yield 

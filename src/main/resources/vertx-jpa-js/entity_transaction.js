@@ -43,8 +43,8 @@ var EntityTransaction = function(j_val) {
   };
 
   /**
-   Commit the current resource transaction, writing any
-   unflushed changes to the database.
+   Commit the current resource transaction, writing any unflushed changes to
+   the database.
 
    @public
 
@@ -70,9 +70,8 @@ var EntityTransaction = function(j_val) {
   };
 
   /**
-   Mark the current resource transaction so that the only
-   possible outcome of the transaction is for the transaction
-   to be rolled back.
+   Mark the current resource transaction so that the only possible outcome of
+   the transaction is for the transaction to be rolled back.
 
    @public
 
@@ -85,8 +84,8 @@ var EntityTransaction = function(j_val) {
   };
 
   /**
-   Determine whether the current resource transaction has been
-   marked for rollback.
+   Determine whether the current resource transaction has been marked for
+   rollback.
 
    @public
 
